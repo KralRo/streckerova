@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-run:
+  build-and-run-misa:
     runs-on: self-hosted
 
     steps:
