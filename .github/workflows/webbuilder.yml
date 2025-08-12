@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Prepare Docker tag
+        id: tagger
+        run: |
+          TAGFILE="$HOME/.docker-ci-myapp.tag"
+          mkdir -p "$(dirname "$TAGFILE")"
+          if [[ -s "$TAGFILE" ]]; then
+            LAST_TAG=$(cat "$TAGFILE")
+          else
+            LAST_TAG=0
+          fi
+          NEXT_TAG=$((LAST_TAG + 1))
+          echo "$NEXT_TAG" > "$TAGFILE"
+          echo "Using tag: $NEXT_TAG"
+          echo "TAG=$NEXT_TAG" >> $GITHUB_ENV
+
+      - name: Build image
+        run: |
+          docker build -t kralr/myapp:$TAG .
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: kralr/myapp:${{ env.TAG }}
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Push container to local docker registry
+        run: |
+          docker push kralr/myapp:$TAG
