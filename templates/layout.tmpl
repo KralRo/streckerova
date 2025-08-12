@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/about">About Me</a>
+    </nav>
+    <main>
+        {{ block "content" . }}{{ end }}
+    </main>
+    <footer>
+        &copy; 2024 CyberSecurity Manager – All rights reserved
+    </footer>
+</body>
+</html>

@@ -16,7 +16,7 @@ jobs:
       - name: Prepare Docker tag
         id: tagger
         run: |
-          TAGFILE="$HOME/.docker-ci-myapp.tag"
+          TAGFILE="$HOME/.docker-ci-misa.tag"
           mkdir -p "$(dirname "$TAGFILE")"
           if [[ -s "$TAGFILE" ]]; then
             LAST_TAG=$(cat "$TAGFILE")
@@ -30,18 +30,18 @@ jobs:
 
       - name: Build image
         run: |
-          docker build -t kralr/myapp:$TAG .
+          docker build -t misa:$TAG .
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: kralr/myapp:${{ env.TAG }}
+          image-ref: misa:${{ env.TAG }}
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
 
-      - name: Push container to local docker registry
+      - name: Push container
         run: |
-          docker push kralr/myapp:$TAG
+          docker push misa:$TAG

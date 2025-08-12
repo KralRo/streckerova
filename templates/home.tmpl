@@ -1,0 +1,24 @@
+{{ define "content" }}
+<div class="row align-items-center">
+    <div class="col-md-7">
+        <h1 class="display-5 fw-bold text-danger mb-3">Welcome!</h1>
+        <p class="lead">
+            Hi, I am <b>Kate Novak</b>, your trusted cybersecurity manager.<br>
+            I help companies secure their IT infrastructure, reduce cyber risk, and prepare for modern digital threats.
+        </p>
+        <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item">Security Audits</li>
+            <li class="list-group-item">Penetration Testing</li>
+            <li class="list-group-item">Employee Security Training</li>
+            <li class="list-group-item">Continuous Consulting</li>
+        </ul>
+        <a href="/about" class="btn btn-danger btn-lg">About Me &rarr;</a>
+    </div>
+    <div class="col-md-5 d-none d-md-block">
+        <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&w=500" 
+            alt="Cybersecurity illustration"
+            class="img-fluid rounded shadow">
+    </div>
+</div>
+{{ end }}
+{{ template "base" . }}

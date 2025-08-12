@@ -1,0 +1,32 @@
+body {
+    background: #fff;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    font-weight: bold;
+    letter-spacing: 0.02em;
+}
+.navbar {
+    box-shadow: 0 4px 16px #dc354540;
+}
+
+footer {
+    letter-spacing: 0.03em;
+    font-size: 0.98em;
+}
+
+.list-group-item {
+    border: none;
+    padding-left: 0;
+    background: transparent;
+    color: #b00020;
+    font-size: 1.07em;
+}
+
+.btn-danger {
+    box-shadow: 0 2px 8px #b0002030;
+}
+
+img {
+    object-fit: cover;
+}
